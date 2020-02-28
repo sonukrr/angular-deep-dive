@@ -1,27 +1,24 @@
 <div class="top-menu">
-
     <img class="logo" src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-
-
-</div>
-<!-- <div class="demo">
-    <div> Start Date: {{startDate | date: 'MMM dd yyyy'}}</div>
-    <div>{{title|uppercase}}</div>
-    <div *ngFor="let pair of course | keyvalue">
-        {{pair.key}}
-    </div>
-</div> -->
-<!-- <div class="courses">
-    <course-card *ngFor="let course of courses | slice:0:3; index as i; first as isFirst; last as isLast; even as isEven; odd as isOdd" [class.is-first]="isFirst" [class.is-last]="isLast" [class.is-even]="isEven" [class.is-odd]="isOdd" (courseSelectedEmitter)="oncourseClicked($event)"
-        [course]='course' [cardIndex]="i+1"></course-card>
-</div> -->
-<button (click)="editCourses()">Edit courses</button>
-<div class="courses">
-    <course-card *ngFor="let course of courses" (courseSelectedEmitter)="oncourseClicked($event)" [course]='course' [cardIndex]="i+1"></course-card>
 </div>
 
-<!-- <div class="courses">
-    <course-card #cardRef1 (courseSelectedEmitter)="oncourseClicked($event)" [course]=courses[0]></course-card>
-    <course-card #cardRef2 (courseSelectedEmitter)="oncourseClicked($event)" [course]=courses[1]></course-card>
+<div class="courses" *ngIf="courses[0] as course">
+    <course-card (courseSelectedEmitter)="oncourseClicked($event)" [course]="course">
+        <div class="course-title"> {{course.description}}
+        </div>
+        <img width="300" alt="Angular Logo" [src]="course?.iconUrl">
 
-</div> -->
+        <h5>Total lectures: 10</h5>
+
+        <div class="course-description">
+            {{course.longDescription}}
+        </div>
+
+        Edit description: <textarea></textarea>
+    </course-card>
+
+    <course-card (courseSelectedEmitter)="oncourseClicked($event)" [course]=courses[1]>
+        <h1>Total lectures: 10</h1>
+    </course-card>
+
+</div>

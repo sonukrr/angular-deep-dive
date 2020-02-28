@@ -3,10 +3,13 @@
 </div>
 
 <div class="courses" *ngIf="courses[0] as course">
+
     <course-card (courseSelectedEmitter)="oncourseClicked($event)" [course]="course">
         <div class="course-title"> {{course.description}}
         </div>
-        <img width="300" alt="Angular Logo" [src]="course?.iconUrl">
+        <course-image [src]="course.iconUrl"></course-image>
+        <course-image [src]="courses[1].iconUrl"></course-image>
+        <course-image [src]="courses[2].iconUrl"></course-image>
 
         <h5>Total lectures: 10</h5>
 
@@ -17,8 +20,7 @@
         Edit description: <textarea></textarea>
     </course-card>
 
-    <course-card (courseSelectedEmitter)="oncourseClicked($event)" [course]=courses[1]>
-        <h1>Total lectures: 10</h1>
-    </course-card>
+
+
 
 </div>

@@ -1,11 +1,10 @@
 <ng-container *ngIf="course">
     <div class="course-card" [ngClass]="cardClasses()">
-        <ng-content select=".course-title"></ng-content>
 
-        <ng-content select="img"></ng-content>
+        <ng-content select=".course-title"></ng-content>
+        <ng-content select=".course-img"></ng-content>
         <ng-content select=".course-description"></ng-content>
         <ng-content></ng-content>
-
 
         <ng-container [ngSwitch]="course.category">
             <div class="course-category">

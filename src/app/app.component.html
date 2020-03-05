@@ -1,27 +1,26 @@
 <div class="top-menu">
 
-    <img class="logo" src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
+  <img class="logo"
+       src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
+
+</div>
+
+<div>
+
+  <div class="courses" *ngIf="courses | async as courses">
+
+    <course-card (courseChanged)="save($event)"  *ngFor="let course of courses"
+                 [course]="course">
+
+      <course-image [src]="course.iconUrl"></course-image>
+
+    </course-card>
+
+  </div>
 
 
 </div>
-<!-- <div class="demo">
-    <div> Start Date: {{startDate | date: 'MMM dd yyyy'}}</div>
-    <div>{{title|uppercase}}</div>
-    <div *ngFor="let pair of course | keyvalue">
-        {{pair.key}}
-    </div>
-</div> -->
-<!-- <div class="courses">
-    <course-card *ngFor="let course of courses | slice:0:3; index as i; first as isFirst; last as isLast; even as isEven; odd as isOdd" [class.is-first]="isFirst" [class.is-last]="isLast" [class.is-even]="isEven" [class.is-odd]="isOdd" (courseSelectedEmitter)="oncourseClicked($event)"
-        [course]='course' [cardIndex]="i+1"></course-card>
-</div> -->
-<button (click)="editCourses()">Edit courses</button>
-<div class="courses">
-    <course-card *ngFor="let course of courses" (courseSelectedEmitter)="oncourseClicked($event)" [course]='course' [cardIndex]="i+1"></course-card>
-</div>
 
-<!-- <div class="courses">
-    <course-card #cardRef1 (courseSelectedEmitter)="oncourseClicked($event)" [course]=courses[0]></course-card>
-    <course-card #cardRef2 (courseSelectedEmitter)="oncourseClicked($event)" [course]=courses[1]></course-card>
 
-</div> -->
+
+

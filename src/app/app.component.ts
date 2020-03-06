@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, InjectionToken, Inject, Optional} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, InjectionToken, Inject, Optional, ChangeDetectionStrategy, ChangeDetectorRef, DoCheck} from '@angular/core';
 import {COURSES} from '../db-data';
 import {Course} from './model/course';
 import {CourseCardComponent} from './course-card/course-card.component';
@@ -18,6 +18,7 @@ import { CONFIG_TOKEN, APP_CONFIG, AppConfig } from './config';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
   // providers: [
   //   { provide: COURSES_SERVICE, 
   //     useFactory:coursesServiceProvider,
@@ -27,29 +28,38 @@ import { CONFIG_TOKEN, APP_CONFIG, AppConfig } from './config';
   // providers: [
   //  CoursesService
   // ]
-  providers: [
-    {provide: CONFIG_TOKEN, useValue: APP_CONFIG}
-  ]
+  // providers: [
+  //   {provide: CONFIG_TOKEN, useValue: APP_CONFIG}
+  // ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit , DoCheck{
 
 
-  courses$ : Observable<Course[]>;
+ 
+  // courses$ : Observable<Course[]>;
+  courses: Course[];
   
 
   // constructor(@Inject(COURSES_SERVICE) private coursesService: CoursesService) {
 
   // }
 
-  constructor(@Optional() private coursesService: CoursesService, @Inject('CONFIG_TOKEN') private config:AppConfig ) {
-    console.log(config);
+  // constructor(@Optional() private coursesService: CoursesService, @Inject('CONFIG_TOKEN') private config:AppConfig ) {
+  //   console.log(config);
+
+  // }
+  constructor(private coursesService: CoursesService, private cd:ChangeDetectorRef){
 
   }
 
   ngOnInit() {
-    this.courses$ = this.coursesService.getCourses();
-    console.log(this.config);
+     this.coursesService.getCourses().subscribe(res=> this.courses = res);
+    // console.log(this.config);
     
+    
+   }
+   ngDoCheck(){
+    this.cd.markForCheck();
    }
 
    save(course:Course){
@@ -58,6 +68,14 @@ export class AppComponent implements OnInit {
        
      );
    }
+
+  //  onEditCourse()
+  //  {
+     
+  //    const newCourse = {...this.courses[0]};
+  //    newCourse.description = 'new Value';
+  //    this.courses[0] = newCourse;
+  //  }
 
 
 

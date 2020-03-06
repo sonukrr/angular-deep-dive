@@ -8,6 +8,7 @@ import { CourseImageComponent } from './course-image/course-image.component';
 import { HighlightedDirective } from './directives/highlighted.directive';
 import { NgxUnlessDirective } from './directives/ngx-unless.directive';
 import {HttpClientModule} from '@angular/common/http';
+import { CONFIG_TOKEN } from './config';
 
 @NgModule({
   declarations: [

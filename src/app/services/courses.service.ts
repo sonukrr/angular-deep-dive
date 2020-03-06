@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Course } from '../model/course';
+import { COURSES } from 'src/db-data';
 
 //tree-shakable provider
 @Injectable({
@@ -16,7 +17,9 @@ export class CoursesService {
     .set("page","1")
     .set("pageSize","10");
     //use of async pipe over observable's take care of subscribing and unsubscribing(preventing memory leaks)
-   return  this.http.get<Course[]>('/api/courses',{params});
+  //  return  this.http.get<Course[]>('/api/courses',{params});
+
+  return of(COURSES)
   }
 
   saveCourse(course:Course){

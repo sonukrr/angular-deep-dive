@@ -10,7 +10,9 @@ import {
     Output,
     QueryList,
     ViewEncapsulation,
-    Inject
+    Inject,
+    ChangeDetectionStrategy,
+    Attribute
 } from '@angular/core';
 import {Course} from '../model/course';
 import { CoursesService } from '../services/courses.service';
@@ -19,6 +21,7 @@ import { CoursesService } from '../services/courses.service';
     selector: 'course-card',
     templateUrl: './course-card.component.html',
     styleUrls: ['./course-card.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
     // providers: [
     //     CoursesService
     //    ]
@@ -39,8 +42,10 @@ export class CourseCardComponent implements OnInit {
 
     // }
 
-    constructor( private coursesService:CoursesService) {
+    constructor( private coursesService:CoursesService, @Attribute('type') private type:string) {
 
+        console.log(type);
+        
     }
 
     ngOnInit() {
@@ -55,7 +60,11 @@ export class CourseCardComponent implements OnInit {
 
     }
 
+    updateNewTitle(newTitle: string){
+        this.course.description = newTitle;
+    }
 
+    
 
 
 }

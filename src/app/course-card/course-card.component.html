@@ -1,5 +1,6 @@
 <div class="course-card" *ngIf="course" #container>
 
+
   <div class="course-title">
     {{ cardIndex || '' + ' ' + course.description }}
   </div>
@@ -9,7 +10,7 @@
 
   <div class="course-description">
 
-    Edit Title: <input #courseTitle [value]="course.description">
+    Edit Title: <input #courseTitle [value]="course.description" (keyup)="updateNewTitle(courseTitle.value)">
 
   </div>
 

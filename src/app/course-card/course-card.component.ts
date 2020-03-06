@@ -1,70 +1,39 @@
 import {
-    AfterContentInit,
-    AfterViewInit,
-    Component,
-    ContentChildren,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-    QueryList,
-    ViewEncapsulation,
-    Inject,
-    ChangeDetectionStrategy,
-    Attribute
-} from '@angular/core';
-import {Course} from '../model/course';
-import { CoursesService } from '../services/courses.service';
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Attribute
+} from "@angular/core";
+import { Course } from "../model/course";
 
 @Component({
-    selector: 'course-card',
-    templateUrl: './course-card.component.html',
-    styleUrls: ['./course-card.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
-    // providers: [
-    //     CoursesService
-    //    ]
+  selector: "course-card",
+  templateUrl: "./course-card.component.html",
+  styleUrls: ["./course-card.component.css"]
 })
 export class CourseCardComponent implements OnInit {
+  @Input()
+  course: Course;
 
-    @Input()
-    course: Course;
+  @Input()
+  cardIndex: number;
 
-    @Input()
-    cardIndex: number;
+  @Output("courseChanged")
+  courseEmitter = new EventEmitter<Course>();
 
-    @Output('courseChanged')
-    courseEmitter = new EventEmitter<Course>();
+  constructor(@Attribute("type") type: string) {
+    console.log(type);
+  }
 
+  ngOnInit() {}
 
-    // constructor(@Inject(COURSES_SERVICE) private coursesService:CoursesService) {
+  onSaveClicked(description: string) {
+    this.courseEmitter.emit({ ...this.course, description });
+  }
 
-    // }
-
-    constructor( private coursesService:CoursesService, @Attribute('type') private type:string) {
-
-        console.log(type);
-        
-    }
-
-    ngOnInit() {
-    console.log("coursesService course card",this.coursesService);
-
-    }
-
-
-    onSaveClicked(description:string) {
-
-        this.courseEmitter.emit({...this.course, description});
-
-    }
-
-    updateNewTitle(newTitle: string){
-        this.course.description = newTitle;
-    }
-
-    
-
-
+  updateNewTitle(newTitle: string) {
+    this.course.description = newTitle;
+  }
 }

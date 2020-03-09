@@ -2,11 +2,18 @@
   <img class="logo" src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
 </div>
 
-<button (click)="destroyCardComponent()">Destroy card component</button>
+<h4 i18n="welcome message|It is to greet user@@welcomeMessage">Welcome to Angular app</h4>
+<button (click)="destroyCardComponent()" i18n>Destroy card component</button>
 <button (click)="triggerOnChange()">Trigger ngOnChanges</button>
+<button (click)="categoryChange()">category change</button>
+<h3 i18n>{courseTotal, plural, =0 {No Courses available} =1 {One course is available} other {A total of {{courseTotal}}
+  course is available }}</h3>
 
-<div class="courses" *ngIf="courses[0] as course">
-  <course-card (courseChanged)="save($event)" [course]="course" type="beginner">
+
+
+<div class="courses">
+  <course-card *ngFor="let course of courses  " (courseChanged)="save($event)"
+    [course]="course" type="beginner">
     <course-image [src]="course.iconUrl"></course-image>
   </course-card>
 </div>

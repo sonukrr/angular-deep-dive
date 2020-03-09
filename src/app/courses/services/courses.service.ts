@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import { Course } from "../model/course";
 import { COURSES } from "src/db-data";
+import { Course } from "src/app/model/course";
 
 //tree-shakable provider
 @Injectable({

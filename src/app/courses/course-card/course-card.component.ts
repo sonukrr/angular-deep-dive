@@ -11,10 +11,9 @@ import {
   AfterViewChecked,
   AfterViewInit,
   AfterContentInit,
-  DoCheck,
-  ChangeDetectorRef
+  DoCheck
 } from "@angular/core";
-import { Course } from "../model/course";
+import { Course } from "src/app/model/course";
 
 @Component({
   selector: "course-card",
@@ -63,8 +62,8 @@ export class CourseCardComponent
   }
 
   ngAfterContentChecked(): void {
-    this.course.description = "new title";
-    this.course.category = "ADVANCED";
+    // this.course.description = "new title";
+    // this.course.category = "ADVANCED";
     //   ExpressionChangedAfterItHasBeenCheckedError
     //   this.course.iconUrl = "";
     console.log("ngAfterContentChecked");
